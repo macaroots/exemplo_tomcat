@@ -1,2 +1,3 @@
 # exemplo_tomcat
-Exemplo Tomcat + MySQL + Maven + Docker
+* v0.1 - Exemplo Tomcat + MySQL + Maven + Docker
+* v0.2 - Exemplo Tomcat + MySQL + Maven + Docker + Websocket
