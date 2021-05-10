@@ -1,4 +1,4 @@
-package agenda;
+package teste;
 
 public class Teste {
     public String oi() {

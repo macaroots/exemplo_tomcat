@@ -1,14 +1,28 @@
-<%@page import="agenda.Teste" %>
+<%@page import="teste.Teste" %>
 <%
 Teste teste = new Teste();
+String mensagem = (String) request.getAttribute("mensagem");
 %><!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
 </head>
 <body>
-<img src="favicon.ico" />
-<h2>Bye, World!!! <%=teste.oi()%></h2>
-<a href="ola.jsp">Olá</a>
+    <header>
+        <img src="favicon.ico" />
+        <nav>
+            <ul>
+                <li><a href="/">Início</a></li>
+                <li><a href="ola">Servlet doGet()</a></li>
+                <li><a href="ola.jsp">JSP</a></li>
+                <li><a href="chat.html">WebSocket</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Página inicial!</h1>
+        <p>Mensagem do Servlet: <%=mensagem%></p>
+        <p>Chamando classe externa: <%=teste.oi()%></p>
+    </main>
 </body>
 </html>
