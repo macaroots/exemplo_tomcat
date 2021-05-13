@@ -1,6 +1,7 @@
 # exemplo_tomcat
 
 Exemplo Tomcat + MySQL + Maven + Docker + Websocket
+Exemplo Tomcat + MySQL + Maven + Docker + Websocket + Agentes
 
 Clonar repositório:
 ```

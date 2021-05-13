@@ -1,11 +1,12 @@
 <%@page import="teste.Teste" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%
 Teste teste = new Teste();
 String mensagem = (String) request.getAttribute("mensagem");
 %><!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="UTF-8"/>
 </head>
 <body>
     <header>
@@ -19,6 +20,7 @@ String mensagem = (String) request.getAttribute("mensagem");
             </ul>
         </nav>
     </header>
+    Olá!
     <main>
         <h1>Página inicial!</h1>
         <p>Mensagem do Servlet: <%=mensagem%></p>
