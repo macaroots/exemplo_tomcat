@@ -61,7 +61,7 @@ public class ContextListener implements ServletContextListener {
         }});
         Agent agent = Ceed.getAgent(agentName);
         agent.see("set", new Object [] {"publicPath", publicPath});
-        agent.see("set", new Object [] {"rootPath", rootPath});
+        agent.see("set", new Object [] {"srcPath", rootPath});
 		agent.see("set", new Object [] {"binPath", binPath});
 		agent.see("set", new Object [] {"classpath", classpath});
 		agent.see("set", new Object [] {"host", host});

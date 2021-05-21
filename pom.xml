@@ -53,6 +53,5 @@
 
     <build>
         <directory>${project.basedir}/webapp/WEB-INF/</directory>
-        <finalName>teste</finalName>
     </build>
 </project>

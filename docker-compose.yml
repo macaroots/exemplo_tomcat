@@ -7,7 +7,7 @@ services:
     environment:
       - MYSQL_HOST=db
     volumes:
-      - ./webapp/:/usr/local/tomcat/webapps/ROOT/
+      - ./webapp/:/usr/local/tomcat/webapps/LEA/
     links:
       - db
     depends_on:
