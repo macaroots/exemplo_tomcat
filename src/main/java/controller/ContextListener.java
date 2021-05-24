@@ -18,6 +18,9 @@ import org.apache.tomcat.jdbc.pool.PoolProperties;
 
 import br.ifce.brain.MySQLBrain;
 import br.ifce.mind.actions.AbstractAction;
+import br.ifce.mind.actions.ceed.Live;
+import br.ifce.mind.actions.ceed.Teach;
+import br.ifce.mind.actions.standalone.TeachStandAlone;
 import br.ifce.mind.Agent;
 import br.ifce.mind.Ceed;
 
@@ -49,9 +52,62 @@ public class ContextListener implements ServletContextListener {
         db = System.getenv("MYSQL_DATABASE");
         debug = Boolean.parseBoolean(context.getInitParameter("debug"));
 		
+		TeachStandAlone.getSkills().put("config", new AbstractAction() {
+            public void act(Object a, Object c) {
+                Agent agent = this.getAgent();
+            
+                System.out.println("Configuring " + agent);
+                System.out.println("srcPath: " + rootPath);
+                System.out.println("binPath: " + binPath);
+                System.out.println("classpath: " + classpath);
+                
+                
+                agent.see("set", new Object [] {"srcPath", rootPath});
+                agent.see("set", new Object [] {"binPath", binPath});
+                agent.see("set", new Object [] {"classpath", classpath});
+                agent.see("set", new Object [] {"live", new Live()});
+                
+                try {
+                    PoolProperties p = new PoolProperties();
+                    p.setUrl("jdbc:mysql://" + host + ":3306/" + db);
+                    p.setDriverClassName("com.mysql.cj.jdbc.Driver");
+                    p.setUsername(user);
+                    p.setPassword(password);
+                    p.setJmxEnabled(true);
+                    p.setTestWhileIdle(false);
+                    p.setTestOnBorrow(true);
+                    p.setValidationQuery("SELECT 1");
+                    p.setTestOnReturn(false);
+                    p.setValidationInterval(30000);
+                    p.setTimeBetweenEvictionRunsMillis(30000);
+                    p.setMaxActive(100);
+                    p.setInitialSize(10);
+                    p.setMaxWait(10000);
+                    p.setRemoveAbandonedTimeout(60);
+                    p.setMinEvictableIdleTimeMillis(30000);
+                    p.setMinIdle(10);
+                    p.setLogAbandoned(true);
+                    p.setRemoveAbandoned(true);
+                    p.setJdbcInterceptors(
+                            "org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;"+
+                            "org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer");
+                    DataSource datasource = new DataSource();
+                    datasource.setPoolProperties(p);
+                    MySQLBrain brain = new MySQLBrain(datasource);
+                    brain.debug = debug;
+                    agent.see("addLibrary", brain);			
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+                
+            }
+		});
+        Teach.getSkills().put("live", new Live());
+		Agent ceed = Ceed.getInstance();
+		
 		List<Object> questions = new ArrayList<Object>();
 		context.setAttribute("questions", questions);
-		Ceed.getInstance().see("set", new Object [] {"askFor", new AbstractAction() {
+		ceed.see("set", new Object [] {"askFor", new AbstractAction() {
             @Override
             public void act(Object o, Object o1) {
                 Object [] args = (Object []) o;
@@ -61,50 +117,9 @@ public class ContextListener implements ServletContextListener {
         }});
         Agent agent = Ceed.getAgent(agentName);
         agent.see("set", new Object [] {"publicPath", publicPath});
-        agent.see("set", new Object [] {"srcPath", rootPath});
-		agent.see("set", new Object [] {"binPath", binPath});
-		agent.see("set", new Object [] {"classpath", classpath});
-		agent.see("set", new Object [] {"host", host});
-		agent.see("set", new Object [] {"user", user});
-		agent.see("set", new Object [] {"password", password});
-		agent.see("set", new Object [] {"db", db});
 		
-		try {
-			PoolProperties p = new PoolProperties();
-			p.setUrl("jdbc:mysql://" + host + ":3306/" + db);
-			p.setDriverClassName("com.mysql.cj.jdbc.Driver");
-			p.setUsername(user);
-			p.setPassword(password);
-			p.setJmxEnabled(true);
-			p.setTestWhileIdle(false);
-			p.setTestOnBorrow(true);
-			p.setValidationQuery("SELECT 1");
-			p.setTestOnReturn(false);
-			p.setValidationInterval(30000);
-			p.setTimeBetweenEvictionRunsMillis(30000);
-			p.setMaxActive(100);
-			p.setInitialSize(10);
-			p.setMaxWait(10000);
-			p.setRemoveAbandonedTimeout(60);
-			p.setMinEvictableIdleTimeMillis(30000);
-			p.setMinIdle(10);
-			p.setLogAbandoned(true);
-			p.setRemoveAbandoned(true);
-			p.setJdbcInterceptors(
-					"org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;"+
-					"org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer");
-			DataSource datasource = new DataSource();
-			datasource.setPoolProperties(p);
-			MySQLBrain brain = new MySQLBrain(datasource);
-			brain.debug = debug;
-			agent.see("addLibrary", brain);			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
 		
 		context.setAttribute("front", agent);
-		agent.see("live", event);
-		System.out.println(agent + " lived!");
     }
 
 	/**

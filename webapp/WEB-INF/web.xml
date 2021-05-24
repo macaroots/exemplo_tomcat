@@ -26,7 +26,7 @@
   </context-param>
   <context-param>
       <param-name>classpath</param-name>
-      <param-value>.:/usr/local/tomcat/webapps/LEA/WEB-INF/lib/mind-1.jar:/usr/local/tomcat/lib/servlet-api.jar:/usr/local/tomcat/lib/websocket-api.jar</param-value>
+      <param-value>.:/usr/local/tomcat/webapps/LEA/WEB-INF/lib/mind-0.0.2.jar:/usr/local/tomcat/lib/servlet-api.jar:/usr/local/tomcat/lib/websocket-api.jar</param-value>
   </context-param>
   <context-param>
       <param-name>debug</param-name>
