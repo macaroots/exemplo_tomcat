@@ -36,14 +36,14 @@ public class ContextListener implements ServletContextListener {
      */
     public void contextInitialized(ServletContextEvent event) {
     	
-		String agentName, publicPath, rootPath, binPath, classpath;
+		String agentName, publicPath, srcPath, binPath, classpath;
     	String host, user, password, db;
 		boolean debug;
 
     	ServletContext context = event.getServletContext();
         agentName = context.getInitParameter("agentName");
         publicPath = context.getInitParameter("publicPath");
-        rootPath = context.getInitParameter("rootPath");
+        srcPath = context.getInitParameter("srcPath");
         binPath = context.getInitParameter("binPath");
         classpath = context.getInitParameter("classpath");
         host = System.getenv("MYSQL_HOST");
@@ -57,15 +57,14 @@ public class ContextListener implements ServletContextListener {
                 Agent agent = this.getAgent();
             
                 System.out.println("Configuring " + agent);
-                System.out.println("srcPath: " + rootPath);
+                System.out.println("srcPath: " + srcPath);
                 System.out.println("binPath: " + binPath);
                 System.out.println("classpath: " + classpath);
                 
                 
-                agent.see("set", new Object [] {"srcPath", rootPath});
+                agent.see("set", new Object [] {"srcPath", srcPath});
                 agent.see("set", new Object [] {"binPath", binPath});
                 agent.see("set", new Object [] {"classpath", classpath});
-                agent.see("set", new Object [] {"live", new Live()});
                 
                 try {
                     PoolProperties p = new PoolProperties();
@@ -102,7 +101,6 @@ public class ContextListener implements ServletContextListener {
                 
             }
 		});
-        Teach.getSkills().put("live", new Live());
 		Agent ceed = Ceed.getInstance();
 		
 		List<Object> questions = new ArrayList<Object>();

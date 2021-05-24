@@ -17,7 +17,7 @@
       <param-value>/usr/local/tomcat/webapps/LEA/</param-value>
   </context-param>
   <context-param>
-      <param-name>rootPath</param-name>
+      <param-name>srcPath</param-name>
       <param-value>/usr/local/tomcat/webapps/LEA/WEB-INF/classes/live/</param-value>
   </context-param>
   <context-param>
