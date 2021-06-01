@@ -26,9 +26,9 @@
         <dependency>
             <groupId>br.ifce</groupId>
             <artifactId>mind</artifactId>
-            <version>0.0.2</version>
+            <version>0.0.4</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/webapp/WEB-INF/lib/mind-0.0.2.jar</systemPath>
+            <systemPath>${project.basedir}/webapp/WEB-INF/lib/mind-0.0.4.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>

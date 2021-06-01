@@ -8,6 +8,7 @@ services:
       - MYSQL_HOST=db
     volumes:
       - ./webapp/:/usr/local/tomcat/webapps/LEA/
+      - ./webapp/favicon.ico:/usr/local/tomcat/webapps/ROOT/favicon.ico
     links:
       - db
     depends_on:
