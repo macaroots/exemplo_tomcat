@@ -13,10 +13,11 @@ String mensagem = (String) request.getAttribute("mensagem");
         <img src="favicon.ico" />
         <nav>
             <ul>
-                <li><a href="/">Início</a></li>
+                <li><a href="/LEA">Início</a></li>
                 <li><a href="ola">Servlet doGet()</a></li>
                 <li><a href="ola.jsp">JSP</a></li>
                 <li><a href="chat.html">WebSocket</a></li>
+                <li><a href="/LEA/ce">Agentes</a></li>
             </ul>
         </nav>
     </header>

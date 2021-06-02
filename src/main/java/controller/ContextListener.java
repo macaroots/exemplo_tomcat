@@ -60,11 +60,12 @@ public class ContextListener implements ServletContextListener {
                 System.out.println("srcPath: " + srcPath);
                 System.out.println("binPath: " + binPath);
                 System.out.println("classpath: " + classpath);
-                
+                System.out.println("publicPath: " + publicPath);
                 
                 agent.see("set", new Object [] {"srcPath", srcPath});
                 agent.see("set", new Object [] {"binPath", binPath});
                 agent.see("set", new Object [] {"classpath", classpath});
+                agent.see("set", new Object [] {"publicPath", publicPath});
                 
                 try {
                     PoolProperties p = new PoolProperties();
@@ -94,28 +95,25 @@ public class ContextListener implements ServletContextListener {
                     datasource.setPoolProperties(p);
                     MySQLBrain brain = new MySQLBrain(datasource);
                     brain.debug = debug;
-                    agent.see("addLibrary", brain);			
+                    agent.see("addLibrary", brain);
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
                 
             }
 		});
-		Agent ceed = Ceed.getInstance();
-		
 		List<Object> questions = new ArrayList<Object>();
 		context.setAttribute("questions", questions);
-		ceed.see("set", new Object [] {"askFor", new AbstractAction() {
+		TeachStandAlone.getSkills().put("askFor", new AbstractAction() {
             @Override
             public void act(Object o, Object o1) {
                 Object [] args = (Object []) o;
                 System.out.println("ASKING - " + args[0] + ", " + args[1]);
 				questions.add(o);
             }
-        }});
+        });
+		Agent ceed = Ceed.getInstance();
         Agent agent = Ceed.getAgent(agentName);
-        ceed.see("set", new Object [] {"publicPath", publicPath});
-		
 		
 		context.setAttribute("front", agent);
     }
