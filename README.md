@@ -1,26 +1,25 @@
 # exemplo_tomcat
 
-Exemplo Tomcat + MySQL + Maven + Docker + Websocket
-Exemplo Tomcat + MySQL + Maven + Docker + Websocket + Agentes
+Exemplo Tomcat + MySQL + Maven + Docker + Websocket + MInD
 
-Clonar repositório:
+1. Clonar repositório:
 ```
-git clone https://github.com/macaroots/php_agenda.git
+git clone https://github.com/macaroots/exemplo_tomcat.git
 ```
 
-Compilar classes:
+2. Compilar classes:
 ```
 mvn compile
 ```
 
-Ligar serviços com Docker Compose:
+3. Ligar serviços com Docker Compose:
 ```
 docker-compose up -d
 ```
 * ```-d``` de Detach é opcional.
 * Talvez seja necesário permissão de super-usuário (```sudo```).
 
-Acessar pelo navegador web:
+4. Acessar pelo navegador web:
 ```
 http://localhost:8080
 ```
