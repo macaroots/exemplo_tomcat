@@ -112,6 +112,13 @@ public class ContextListener implements ServletContextListener {
 				questions.add(o);
             }
         });
+		TeachStandAlone.getSkills().put("initAgent", new AbstractAction() {
+            @Override
+            public void act(Object oAgent, Object callback) {
+                Agent agent = (Agent) oAgent;
+                agent.see("live", null, callback);
+            }
+        });
 		Agent ceed = Ceed.getInstance();
         Agent agent = Ceed.getAgent(agentName);
 		
