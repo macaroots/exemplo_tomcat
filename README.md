@@ -21,5 +21,10 @@ docker-compose up -d
 
 4. Acessar pelo navegador web:
 ```
-http://localhost:8080
+http://localhost/LEA
 ```
+
+## Resolução de problemas
+
+1. Verifique se o banco de dados e o usuário foram criados.
+2. Se necessário, reinicie os containers.
