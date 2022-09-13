@@ -1,6 +1,6 @@
 # exemplo_tomcat
 
-Exemplo Tomcat + MySQL + Maven + Docker + Websocket + MInD
+Exemplo Tomcat + MySQL + Maven + Docker + Websocket + jLEA
 
 1. Clonar repositório:
 ```
@@ -21,5 +21,5 @@ docker-compose up -d
 
 4. Acessar pelo navegador web:
 ```
-http://localhost:8080
+http://localhost/LEA
 ```
