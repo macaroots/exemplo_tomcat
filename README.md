@@ -23,3 +23,8 @@ docker-compose up -d
 ```
 http://localhost/LEA
 ```
+
+## Resolução de problemas
+
+1. Verifique se o banco de dados e o usuário foram criados.
+2. Se necessário, reinicie os containers.
